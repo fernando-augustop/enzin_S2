@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu amigãozão</title>
+    <title>Meu mió amigo</title>
     <style>
         body {
             display: flex;
@@ -14,13 +14,14 @@
             margin: 0;
             flex-direction: column;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         .button {
             padding: 15px 30px;
             font-size: 20px;
             color: white;
-            background-color: #0095ff;
+            background-color: #4988fc;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -28,7 +29,7 @@
         }
 
         .button:hover {
-            background-color: #2e13fb;
+            background-color: #0b17fc;
         }
 
         .container {
@@ -45,7 +46,7 @@
             height: 5px;
             background-color: #fff;
             border-radius: 50%;
-            animation: explode 1s ease-out forwards;
+            animation: explode 2s ease-out forwards;
         }
 
         @keyframes explode {
@@ -59,30 +60,74 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
         }
+
+        .password-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .flywheel {
+            display: flex;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <button class="button" onclick="showImage()">Clique para ver meu mió amigo!!!</button>
+    <div class="password-container">
+        <p style="color: white; font-size: 18px;">Escolha um:</p>
+        <div class="flywheel">
+            <button class="option" onclick="checkPassword('Sorvete')">Sorvete</button>
+            <button class="option" onclick="checkPassword('Fortnite')">Fortnite</button>
+            <button class="option" onclick="checkPassword('MetalGear Solid')">MetalGear Solid</button>
+        </div>
+    </div>
     
     <div class="container" id="imageContainer">
         <img src="enzin1.JPG" alt="My Friend">
     </div>
 
     <script>
+        function checkPassword(password) {
+            let validPasswords = ["Sorvete", "Fortnite", "MetalGear Solid"];
+            if (validPasswords.includes(password)) {
+                showImage();
+            }
+        }
+
         function showImage() {
-            document.querySelector('.button').style.display = 'none';
+            document.querySelector('.password-container').style.display = 'none';
             let container = document.getElementById('imageContainer');
             container.style.display = 'flex';
             
-            for (let i = 0; i < 20; i++) {
-                let firework = document.createElement('div');
-                firework.classList.add('fireworks');
-                firework.style.top = `${Math.random() * 100}vh`;
-                firework.style.left = `${Math.random() * 100}vw`;
-                firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-                document.body.appendChild(firework);
-                setTimeout(() => firework.remove(), 1000);
-            }
+            setInterval(createFirework, 200);
+        }
+
+        function createFirework() {
+            let firework = document.createElement('div');
+            firework.classList.add('fireworks');
+            firework.style.top = `${Math.random() * 100}vh`;
+            firework.style.left = `${Math.random() * 100}vw`;
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 3000);
         }
     </script>
 </body>
